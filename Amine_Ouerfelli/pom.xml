@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>montdepiete</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>montdepiete</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -21,6 +21,11 @@
 	    <maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<dependencies>
+	<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
 			<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -57,6 +62,11 @@
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
 		</dependency>
+		<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.3.0</version>
+</dependency>
 		    <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-jasper</artifactId>
@@ -72,8 +82,32 @@
         <version>3.6.0</version>
         <scope>provided</scope>
       </dependency>
-
-
+      <dependency>
+    <groupId>com.oracle.database.security</groupId>
+    <artifactId>osdt_core</artifactId>
+    <version>19.8.0.0</version>
+</dependency>
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>3.12</version>
+</dependency>
+<!-- excel 2007 over-->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>3.12</version>
+</dependency>
+<dependency>
+        <groupId>org.apache.xmlbeans</groupId>
+        <artifactId>xmlbeans</artifactId>
+        <version>3.1.0</version>
+</dependency>
 	</dependencies>
 
 	<build>
