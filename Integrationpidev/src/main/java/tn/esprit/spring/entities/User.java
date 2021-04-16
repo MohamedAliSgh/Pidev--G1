@@ -1,38 +1,41 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import javax.persistence.*;
+
+
+
+
+
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
 
 @Entity 
-@Table(name ="User_Table")
+@Table(name ="Table_User")
 public class User implements Serializable {
 	
+	public User() {
+		super();
+		
+	}
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long userid;
 	private String FirstName;
 	private String LastName;
 	private String Email ;
 	private Date DateOfBirth;
 	private String Gender ;
-	private String Login;
+	private String login;
 	private String Password;
 	@Enumerated(EnumType.STRING)
-	Profile profile;
+	Role role;
+	
 	
 	
 	
@@ -50,12 +53,12 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.LastName = lastName;
 	}
-	public Long getUserId() {
-		return this.Id;
+	public long getUserId() {
+		return this.userid;
 	}
 
-	public void setUserId( long id) {
-		this.Id=id;
+	public void setUserId( Long id) {
+		this.userid=id;
 	}
 	public String getEmail() {
 		return this.Email;
@@ -84,7 +87,7 @@ public class User implements Serializable {
 	}
 
 	public void setLogin(String login) {
-		this.Login=login;
+		this.login=login;
 	}
 	
 	public String getPassword() {
@@ -95,43 +98,52 @@ public class User implements Serializable {
 		this.Password=pwd;
 	}
 	
-	public Profile getprofile() {
-		return this.profile;
-	}
-
-	public void setprofile(Profile profile) {
-		this.profile=profile;
+	public Role getRole() {
+		return this.role;
 	}
 	
+	public void setRole(Role role) {
+		this.role=role;
+	}
 	
 	
 
-	public User (Long id , String name , String lastname , String email , Date date , String gender , String login , String pswd ) 
+	public User ( String name , String lastname , String email , Date date , String gender , String login , String pswd ) 
 	{
-		this.Id=id;
+		super();
 		this.FirstName=name;
 		this.LastName=lastname;
 		this.Email=email;
 		this.DateOfBirth=date;
 		this.Gender=gender;
-		this.Login=login;
+		this.login=login;
+		this.Password=pswd;
+	}
+
+	
+	
+	public User (Long id , String name , String lastname , String email , Date date , String gender , String login , String pswd ) 
+	{   
+		super();
+		this.userid=id;
+		this.FirstName=name;
+		this.LastName=lastname;
+		this.Email=email;
+		this.DateOfBirth=date;
+		this.Gender=gender;
+		this.login=login;
 		this.Password=pswd;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userid=" + Id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email=" + Email
-				+ ", DateOfBirth=" + DateOfBirth + ", Gender=" + Gender + ", Login=" + Login + ", Password=" + Password
-				+ ", profile=" + profile + "]";
+		return "User [userid=" +userid+ ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email=" + Email
+				+ ", DateOfBirth=" + DateOfBirth + ", Gender=" + Gender + ", Login=" + login + ", Password=" + Password
+				+ ", role=" + role + "]";
 	}
 	
+	
+
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="useer")
 	private  Set<Message> Messages ;
-
-
-
-	public User() {
-		super();
-	}
 }
-

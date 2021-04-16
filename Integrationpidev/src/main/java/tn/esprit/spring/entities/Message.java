@@ -1,9 +1,10 @@
 package tn.esprit.spring.entities;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Message_table")
+@Table(name="table_Message")
 
 public class Message implements Serializable {
 	
@@ -11,17 +12,17 @@ public class Message implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int IdMessage ;
+	private Long IdMessage ;
 	private int IdSender;
 	private int IdReceiver;
-	private String BodyMessage;
+	private String bodyMessage;
 
 	
-	public int getIdMessage() {
+	public Long getIdMessage() {
 		return this.IdMessage ;
 	}
 	
-	public void setIdMessage ( int Id) {
+	public void setIdMessage (Long Id) {
 		this.IdMessage = Id;
 		
 	}
@@ -41,16 +42,28 @@ public class Message implements Serializable {
 	}
 	public String getBodyMessage () 
 	{
-		return this.BodyMessage;
+		return this.bodyMessage;
 	}
 	public void setBodyMessage (String Message) 
-	{ this.BodyMessage = Message ; }
+	{ this.bodyMessage = Message ; }
 	
-	public Message (int IdMsg ,int IdSnd , int IdRvr, String text) {
+	public Message(){}
+	
+	public Message (int IdSnd , int IdRvr, String text) {
+		super();
+		
+		this.IdSender=IdSnd;
+		this.IdReceiver=IdRvr;
+		this.bodyMessage=text;
+	}
+	
+	
+	public Message (Long IdMsg ,int IdSnd , int IdRvr, String text) {
+		super();
 		this.IdMessage=IdMsg;
 		this.IdSender=IdSnd;
 		this.IdReceiver=IdRvr;
-		this.BodyMessage=text;
+		this.bodyMessage=text;
 	}
 	@ManyToOne
 	User useer;
@@ -59,7 +72,7 @@ public class Message implements Serializable {
 	@Override
 	public String toString() {
 		return "Message [IdMessage=" + IdMessage + ", IdSender=" + IdSender + ", IdReceiver=" + IdReceiver
-				+ ", BodyMessage=" + BodyMessage + ", useer=" + useer + "]";
+				+ ", BodyMessage=" + bodyMessage + ", useer=" + useer + "]";
 	}
 	
 	
