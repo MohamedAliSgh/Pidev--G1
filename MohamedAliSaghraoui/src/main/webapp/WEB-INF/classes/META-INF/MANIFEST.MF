@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: spring-boot-data-jpa-mvc-rest
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: 21692
+Implementation-Vendor-Id: tn.esprit.spring
+Build-Jdk: 1.8.0_60
+Implementation-URL: https://spring.io/projects/spring-boot/spring-boot
+ -data-jpa-mvc-rest
+Created-By: Maven Integration for Eclipse
+

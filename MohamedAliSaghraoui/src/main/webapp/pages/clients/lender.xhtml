@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+	<ui:define name="content">
+		<!-- BEGIN : TP1 JSF Introduction Login -->
+		<head>
+		<style type ="text/css">
+		wel{ font-weight :bold;
+		color:red;
+		font-size:large;
+		}
+		</style>
+		</head>
+		<h:panelGroup>
+	
+			<h:form> 
+			<center>
+				<h:outputText id="wel"
+					value="Welcome #{userController. authenticatedUser.firstName} #{userController.authenticatedUser.lastName} to the lender home page" />
+|</center>
+<h:commandLink value="Déconnexion" action="#{userController.doLogout()}" />
+			</h:form>
+		</h:panelGroup>
+		
+	</ui:define>
+</ui:composition>

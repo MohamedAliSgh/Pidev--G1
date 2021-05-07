@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:param name="page_name" value="Accueil" />
+	<ui:define name="content">
+		<!-- BEGIN : TP1 JSF Introduction Login -->
+		<head>
+			<style type ="text/css">
+			first { font-weight : bold;
+			color : red;
+			font-size : large;
+			}
+			</style>
+			</head>
+		<h:panelGroup>
+			<h:form>
+		
+			<center>
+				<h:outputText id="first"
+					value="Bonjour #{userController. authenticatedUser.firstName} #{userController.authenticatedUser.lastName}" />
+|</center>
+<h:commandLink value="Déconnexion" action="#{userController.doLogout()}" />
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup columns="2">
+			<h:form>
+				<table>
+					<tr>
+						<td><h:outputText value="Login (Email)"></h:outputText></td>
+						<td><h:inputText value="#{userController.email}"></h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Mot de Passe"></h:outputText></td>
+						<td><h:inputSecret value="#{userController.password}"></h:inputSecret></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Nom"></h:outputText></td>
+						<td><h:inputText value="#{userController.firstName}"></h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Prenom"></h:outputText></td>
+						<td><h:inputText value="#{userController.lastName}"></h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Date de Naissance"></h:outputText></td>
+						<td><h:inputText value="#{userController.dateNaissance}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Role"></h:outputText></td>
+						<td><h:selectOneMenu value="#{userController.role}">
+								<f:selectItem itemLabel="Choisir le Role" itemValue="#{null}" />
+								<f:selectItems value="#{userController.roles}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Actif / Inactif"></h:outputText></td>
+						<td><h:selectBooleanCheckbox value="#{userController.actif}"></h:selectBooleanCheckbox></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h:commandButton value="Ajouter User"
+								action="#{userController.addUser()}" /> <h:commandButton
+								value="Mettre à jour User"
+								action="#{userController.updateUser()}" /></td>
+					</tr>
+				</table>
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup columns="2">
+			<h:form>
+				<h:dataTable value="#{userController.users}" var="user" border="1">
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Login (Email)" />
+						</f:facet>
+						<h:outputText value="#{user.email}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="prenom" />
+						</f:facet>
+						<h:outputText value="#{user.firstName}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputText value="#{user.lastName}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Role" />
+						</f:facet>
+						<h:outputText value="#{user.role}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Date de Naissance" />
+						</f:facet>
+						<h:outputText value="#{user.dateNaissance}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Actif" />
+						</f:facet>
+						<h:outputText value="#{user.actif == true ? 'Oui' : 'Non'}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton action="#{userController.removeUser(user.id)}"
+							value="Supprimer" />
+						<h:commandButton action="#{userController.displayUser(user)}"
+							value="Afficher" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
