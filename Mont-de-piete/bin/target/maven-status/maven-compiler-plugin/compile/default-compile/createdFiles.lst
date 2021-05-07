@@ -1,0 +1,5 @@
+com/example/demo/DemoApplication.class
+com/example/demo/entities/Account.class
+com/example/demo/services/AccountService.class
+com/example/demo/repositories/AccountRepository.class
+com/example/demo/controllers/AccountController.class
