@@ -10,10 +10,10 @@
             <p:panel header="Account Details">
                 <h:panelGrid columns="1">
                     <p:outputLabel for="name" value="Name: " />
-                    <p:inputText id="name" value="#{AccountController.account.name}" />
-                    <p:outputLabel for="price" value="Price: " />
-                    <p:inputNumber id="price" value="#{AccountController.account.balance}" />
-                    <h:commandButton value="Save" action="#{AccountController.save}" />
+                    <p:inputText id="name" value="#{accountController.account.name}" />
+                    <p:outputLabel for="balance" value="balance: " />
+                    <p:inputNumber id="balance" value="#{accountController.account.balance}" />
+                    <h:commandButton value="Save" action="#{accountController.save}" />
                 </h:panelGrid>
             </p:panel>
         </h:form>
