@@ -1,0 +1,170 @@
+---
+title:" Influence des taux de mortalité sur un produit de rente viagère et de capital décès"
+OUTPUT: html_document:default
+  
+
+## Chargement des packages
+
+```{r setup, include=FALSE ,warning=FALSE,echo=FALSE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+```{r packages,warning=FALSE,message=FALSE}
+library(lifecontingencies)
+library(reliaR)
+library(demography)
+library(StMoMo)
+library(questionr)
+```
+
+## Tache1 : Télécharger Les données pour le pays concerné :Canada
+##Réponse
+```{r echo=TRUE}
+Canda<-read.table(file = file.choose(),header = TRUE ,sep = "", dec = ".")
+head(Canda)
+```
+
+## Préparation des données
+
+```{r warning=FALSE}
+Canda1960<- Canda[which(Canda$Year == 1960),names(Canda)]
+head(Canda1960)
+df_Canda1960<-data.frame(Canda1960)
+str(df_Canda1960$Age)
+df_Canda1960$Age<-as.numeric(as.character(df_Canda1960$Age))
+df_Canda1960$Age[111]<-110
+str(df_Canda1960$Age)
+```
+
+
+## Construction de table de mortalité
+
+```{r warning=FALSE}
+TD1960 <- new("lifetable", x=df_Canda1960$Age, lx=df_Canda1960$lx,name="CANADA")
+TD1960
+```
+## Tache2- Calcul VAP rente + calcul VAP capital
+
+```{r warning=FALSE,message=FALSE}
+i=(1/0.97-1)
+TD1960tb <- new("actuarialtable", x=TD1960@x, lx=TD1960@lx,interest=i)
+TD1960tb
+
+VAP_rente <- axn(TD1960tb, x=58, m=0, i=i)
+VAP_rente #13.64256
+
+VAP_capital <- Axn(TD1960tb, x=58, m=0, i=i)
+VAP_capital #0.5907233
+```
+## Tache 3 : 
+```{r warning=FALSE}
+canada <-hmd.mx(country="CAN",username="mohamedamine.ouerfelli@esprit.tn",password="1622498108",label="Canada")
+canada
+library(forecast)
+library(demography)
+par(mfrow=c(1,2))
+plot(canada,series="male",datatype="rate", main="Canada, Homme, 1921 - 2018",xlab="Age",ylab="Taux (log)")
+plot(canada,series="male",datatype="rate",plot.type="time",main="Canada , Homme, 1921-2018",xlab="Annees",ylab="Taux(logn)")
+n<-length(canada$rate)
+canada1<-canada
+canada1
+for(j in 1:3)
+{apply(canada$pop[[j]], 2, as.numeric)
+sapply(canada$pop[[j]], as.numeric)
+class(canada$pop[[j]]) <- "numeric"
+storage.mode(canada$pop[[j]]) <- "numeric"}
+dim(canada$pop[[j]])
+canada.sm<- smooth.demogdata(canada,method="mspline")
+
+canadalcaM <- lca(canada.sm ,series ="male" , max.age = 110, adjust="dt")
+plot(canadalcaM)
+
+```
+
+
+## Modèle Lee-Carter avec la mèthode fit du package StMoMo en choisissant les plages d'âge et de période
+
+On observant les paramètres du modèle sur toute la pèriode : 
+
++ αx : une fonction unimodale décroissante pour les âges faibles inférieurs à 10 ans puis une forte croissante jusqu’à la fin de la vie ,c'est pourquoi notre plage commence en à 20 ans jusqu'à 100ans et non pas 110 pour éviter les valeurs manquantes.
+
++ kt : cette fonction décroît sur toute la période ..   
+
+
+```{r warning=FALSE}
+Canada.momo <- StMoMoData(data = canada.sm,series = "male" ,type = "central")
+constLC <- function(ax, bx, kt, b0x, gc, wxt, ages) {
+     c1 <- mean(kt[1, ], na.rm = TRUE)
+     c2 <- sum(bx[, 1], na.rm = TRUE)
+     list(ax = ax + c1 * bx, bx = bx / c2, kt = c2 * (kt - c1))}
+age <- 15:100
+annees <- 1925:2016
+LC <- StMoMo(link = "log", staticAgeFun = TRUE, periodAgeFun = "NP", constFun = constLC)
+CanadaFit<- fit(LC, data = Canada.momo, ages.fit = age, years.fit = annees )
+plot(CanadaFit)
+```
+
+## Analyse des paramètres :
+
+- αx :  la valeur moyenne des logs de la mortalité instantanné ( ln µ( x t, ) au cours du temps  ) elle crois en fonction de l’age elle varie entre -7 et -3 .
+
+"- βx indique la sensibilité de la mortalité instantanée par rapport à l’évolution générale de la mortalité."
+
+"- D’après la figure ci-dessus et comme  kt indique l’évolution générale de la mortalité dans le temps ; On constate une tendance linéaire à la décroissance des entre 1940 et les années 2010's.ce qui peut etre expliquer par l'augmentation de la probalité de survie .on remarque aussi un petit pic suivie une intruption qui peut exprimer que l'evolution crut en se rapportant a cette periode de temps entre 2013-2016 en canada le taux de mortalite a augmenté legrement . 
+
+"
+"
+
+## Le résidus du modèle 
+
+```{r warning=FALSE}
+model_res <- resid(CanadaFit)
+plot(model_res)
+```
+
+## Tache 4 : Projection centrale sur 25 ans
+
+```{r warning=FALSE}
+LcFore=forecast(canadalcaM, h = 25 ,method=mean)
+CanadaForcast <- forecast(CanadaFit , h = 25, method=mean)
+plot(CanadaForcast, only.kt=TRUE)
+```
+
+## Tache 5 : Les log taux de mortalités projetés pour la cohortes à partir de 2010
+
+```{r warning=FALSE}
+canada1921 <- extract.years(LcFore, years=2010:2041)
+plot(canada1921)
+```
+
+## Tache 7 : Recalcule des VAP
+```{r warning=FALSE}
+chosen_cohort = 1960
+rates <- cbind(canada$rate$male[25:90,],CanadaForcast$rates[1:66,])
+taux_historique <- extractCohort(fitted(CanadaFit, type = "rates"), cohort = chosen_cohort)
+taux_estime <- extractCohort(CanadaForcast$rates, cohort = chosen_cohort)
+taux <- c(taux_historique,taux_estime)
+
+qx_1960 <- mx2qx(taux)
+
+qx_1960
+lifetable_1960<-probs2lifetable(probs=is.na(qx_1960),type = "qx",name =paste("LC","1950","lt",sep="_"))
+i=(1/0.97-1)
+TD1960LC <- new("actuarialtable", x=lifetable_1960@x, lx=lifetable_1960@lx,interest=i)
+
+VAP_rente_LC <- axn(TD1960LC, x=16, m=0,i=i)
+VAP_rente_LC 
+##16.27813
+
+VAP_capit-al_lC <- Axn(TD1960LC, x=16, m=0, i=i)
+VAP_capital_lC 
+```
+
+## Tache 8 : Les autres paramètres qui influent sur le VAP
+
+"* La VAP dépend de deux facteurs":" l’âge de l’assuré et le taux technique i "
+
+" Pour l’âge: la VAP croit en fct de l’âge on constate une corrélation positive puisque la probabilité de décès augmente en fct de ce dernier"
+
+"Le taux technique i :  le taux technique diminue=>vap augmente"
+
