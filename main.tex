@@ -1,0 +1,359 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{inputenc}
+
+
+\begin{document}
+\includegraphics[width=\textwidth]{Image1.png}
+
+\begin{center}
+    {\huge \textbf{Projet Actuariat Vie}}
+       	\setstretch{3}
+     
+      \textbf{\huge 4 INFINI 2 }
+       https://www.overleaf.com/project/60b645e3aa502f2bb4eb4e15
+        {\huge \textbf{Groupe 1}}
+     	\begin{singlespace} 
+        {\huge \textbf{Sujet} : Influence des taux de mortalité sur un produit de rente viagère et de capital décès }\
+         \end{singlespace}
+       {\huge \textbf{Réalisé par:}}
+     
+      {\huge OUERFELLI Mohamed Amine}
+      
+      {\huge ELECHI Ichrak }
+   
+      {\huge YAAKOUBI  Wassim}
+      
+      {\huge SAGHRAOUI Mohamed Ali}
+      \setstretch{3}
+      
+      {\Large Année Universitaire : 2020/2021}
+\end{center}
+\newpage
+\begin{center}
+    {\huge \textbf{Remerciements}}
+\end{center}
+
+\setstretch{2}
+
+{\Large Au terme de ce projet, nous tenons à offrir nos remerciements les plus sincères à nos deux professeurs\textbf{ Mr. Anis MATOUSSI} et\textbf{ Mr. Mohamed Anis BEN LASMAR} pour leurs énormes efforts fournis dans notre formation , leur dévouement et leur encadrement pédagogique bénéfique.}
+    
+\newpage
+\setstretch{1.5}
+\tableofcontents
+\newpage
+\section{Introduction générale}
+{\large A l'aide des connaissances acquises lors de l'aprentissage du module Actuariat Vie,nous allons faire l'estimation et la projection de la mortalité d'une cohorte d'hommes canadiens assurés dans le but de calculer la valeur actuelle probable (VAP) de la rente viagère anticipée et du capital décès. On va supposer que l'assureur possède un portefeuille d'hommes assurés nés en 1960.}
+
+
+{\large Nous allons alors mettre en évidence deux grandes parties dans notre travail ; la première s'agit de présenter les notions de base de l'actuariat vie , la deuxième sert à clarifier les étapes du traitement du problème et la troisième est réservée à la présentation des outils utilisés.}
+\newpage
+\section{Cadre général}
+\subsection{Introduction}
+{\large Nous allons commencer par la présentations des connaissances de bases autour desquels tourne notre projet}
+\subsection{Actuariat Vie}
+\subsubsection{Definition}
+{\large L'activité appelée actuariat, réalisée par des actuaires, s'agit de faire des calculs de probabilités à partir de statistiques. Ces calculs sont le plus souvent destinés à établir des taux de primes d'assurance en tenant compte de la fréquence des risques possibles comme la mortalité. La plupart des actuaires sont au service des compagnies d'assurance, mais il y a ceux qui travaillent pour des bureaux d'études privés ou des administrations et réalisent les calculs et les prévisions nécessaires dans beaucoup de domaines.
+\subsubsection{Utilité}
+{\large L'actuaire calcule la probabilité de certains risques en s'appuyant sur les sciences mathématiques, économique et sur les statistiques. Il identifie et étudie l'ensemble des risques matériels et humains (maladie, habitation, entreprise..) et anticipe leur impact financier}
+\subsection{Les contrats}
+{\large Il est convenable de distinguer entre deux types de contrats à étudier : le contrat de rente viagère et le contrat de capital décès.}
+\subsubsection{Contrat de rente viagère}
+{\large L’objectif général des contrats de rente viagère est d’apporter un revenu complémentaire à ceux des régimes de retraite “officiels” et obligatoires.}
+\setstretch{1.25}
+
+{\large Une rente viagère à termes anticipés est une série de flux d'argent allant d'aujourd'hui  du contrat jusqu'au décès. La valeur actuelle et la valeur actuelle probable se calculent à l'aide des formules suivantes:  }
+
+\includegraphics[width=\textwidth]{1.png}
+{}
+\setstretch{1.25}
+
+{\large Une rente viagère à termes anticipés est une série de flux d'argent allant de la première année du contrat jusqu'au décès. La valeur actuelle et la valeur actuelle probable se calculent à l'aide des formules suivantes: }
+
+\includegraphics[width=\textwidth]{2 (2).png}
+\setstretch{1.25}
+
+{\large Une rente viagière différée et temporaire est une série annuelle de flux d'argent jusqu’au décès
+de l’individu dont les versements ne peuvent avoir lieu qu’entre [s, s + t[. On calcule la VA et la VAP à l'aide des formules suivantes :  }
+
+\includegraphics[width=\textwidth]{3.png}
+
+
+\subsubsection{Contrat de capital décès}
+{\large c'est le versement d'un capital ou d'une rente en cas de décès de l'assuré survenant pendant la période de validité du contrat. on distingue deux types : }
+\setstretch{1.25}
+
+{\large Un capital au décès est le versement d'argent en fin d’année du décès. Ses valeurs actuelle et
+actuelle probable sont}
+
+\includegraphics[width=\textwidth]{4.png}
+\setstretch{1.25}
+
+{\large Un capital au décès différé et temporaire est le versement d'argent en fin d’année du décès si le décès a lieu entre [s, s + t[. Ses valeurs actuelle et actuelle probable sont}
+
+\includegraphics[width=\textwidth]{5.png}
+
+
+\subsection{Modèle de Lee-Carter}
+{\large Il s'agit d'un algorithme qu'on utilise pour prédire la mortalité et l'espérance de vie. 
+Ce modèle a été conçu , à la base , pour extrapoler les tendances passées sur des données américaines, son utilisation est devenue après un standard.La modélisation du taux instantané de mortalité est comme suit :}
+\setstretch{1.5}
+\begin{center}
+    {\large ln $\mu$xt = $\alpha$x + $\beta$xkt + $\epsilon$xt }
+\end{center}
+\setstretch{1.5}
+
+{\large - $\mu$xt représente le taux instantané de mortalité à la date t pour l’âge x}
+\setstretch{1.5}
+
+{\large - $\alpha$x est la composante de l’âge x, c'est la  la valeur moyenne des ln($\mu$xt) au cours du temps}
+\setstretch{1.5}
+
+{\large - kt décrit l’évolution générale de la mortalité}
+\setstretch{1.5}
+
+{\large - $\beta$x traduit la sensibilité de la mortalité instantanée à l’âge x par rapport à
+l’évolution générale kt où d(ln($\mu$xt)/dkt = $\beta$}
+\setstretch{1.5}
+
+{\large -$\epsilon$xt est une variable aléatoire iid distribuée selon une loi N(0,$\sigma$²).}
+\setstretch{1.5}
+
+{\large En conclusion , il s'agit d’ajuster à la série (doublement indicée par x et t) des
+logarithmes des taux instantanés de décès une structure paramétrique (déterministe) avec un phénomène aléatoire qui est  le critère
+d’optimisation retenu qui consiste à maximiser la variance expliquée , ce qui revient à minimiser celle des erreurs.}
+\setstretch{1.5}
+
+\begin{center}
+    {\large on a : $\sum_{t=1}^{n} (k_{t})$=0 ; b{x}=1
+}
+\end{center}
+\setstretch{1.5}
+
+{\large  on a $ 2m + n - 2$ paramètres avec $m=x_{max}x_{min}+1$ }
+\setstretch{1.5}
+
+{\large A l'aide de la méthode des moindres carrés on a :}
+\setstretch{1.5}
+
+\begin{center}
+    {\large  ( $\alpha_{x}$,$\beta_{x}$,$k_{t}$)=argmin $\sum_{x,t}((ln $\mu_{xt} $ -$\alpha_{x}$-$\beta_{x}$kt)^2)$   }
+\end{center}
+
+\subsubsection{Estimations}
+{\large  les paramètres à estimer sont $\alpha_{x}$ , $\beta_{x} $ et $k_{t}$ qui se fait en trois étapes: }
+\setstretch{1.5}
+
+{\large \textbf{1ère étape :}}
+{\large On commence à estimer les taux bruts ensuite on trouve en tenant compte des conditions d'identifiabilité sur les $k_{t}$ la valeur de $\alpha_{x}$. cette dernière sera estimé tout en prenant en compte toutes les contraintes.
+En conclusion , on a $\alpha_{x}$ est la moyenne  temporelle à l'âge x des taux instantanés de décès. }
+\setstretch{1.5}
+
+{\large \textbf{2ème étape :}}
+{\large Pour estimer  les paramètres $k_{t}$ et $\beta_{x}$ , on réalise la matrice $Z=(z_{xt})$ définie par $z_{xt}$= $lnµ_{xt}$-$\alpha_{x}$ . On aura en déterminant les valeurs propres les estimations de $k_{t}$ et $\beta_{x}$ .} 
+\setstretch{1.5}
+
+{\large \textbf{3ème étape :}}
+{\large Cette étape est secondaire. On peut en effet ajuster les $k_{t}$ pour que le nombre total de décès enregistrés chaque année corresponde à celui prédit par le modèle, étant donnés les $\beta_{x}$ et $\alpha_{x}$.}
+
+\subsection{Valeur actuelle probable}
+{ \large La valeur actuelle est en fait  la valeur actuelle des flux futurs espérés, qui est actualisée en dépendant du taux d'actualisation. Elle repose sur la relation entre le temps et l'argent.}
+
+\includegraphics[width=\textwidth]{9.png}
+\setstretch{1.25}
+
+{\large Avec F0,F1... une serie flux connus , C0,C1.. une série de conditions de paiements aléatoires et un facteur d'actualisation 0<V<1}
+\subsection{Conclusion}
+{\large Dans la première partie on a souligné les notions de bases nécessaires à la compréhension du travail réalisé dans ce projet.Dans la partie d'après on va présenter la partie du traitement du sujet.}
+\newpage
+\section{Présentation et traitements des données}
+\subsection{Introduction}
+{\large Dans cette partie on va gérer l'exemple d'hommes canadiens en 1960.On va citer les différents traitements réalisés tout au long du travail du sujet. }
+\subsection{Présentation des données}
+{\large on a fait l'extraction des données d'une base de données qui s'appelle Human Mortality Database (HMD) qui contient des données sur la mortalité et les populations.
+on a choisi de travailler sur une  des assurés canadiens.}
+\setstretch{1.5}
+
+{\large ci dessous figure un extrait des données téléchargés:}
+
+\includegraphics[width=\textwidth]{10.png}
+\begin{center}
+    {\large Figure1 : extrait de données}
+\end{center}
+\setstretch{1.5}
+
+{\large Cette base présente des cohortes canadiens de 1921 à 2018 dont l’âge varie entre 0 et 100 ans.}
+
+\subsection{Traitements}
+\subsubsection{Table de mortalité}
+{\large Pour commencer , on a fait l'extraction des données de la cohorte en 1960 , puis , on a construit la table de mortalité}
+
+\includegraphics[width=\textwidth]{11.png}
+\begin{center}
+    {\large Figure2 : extrait de table de mortalité}
+\end{center}
+
+{\large x est l'âge et $l_{x}$ le nombre d'individus d'âge au moins x}
+\setstretch{1.25}
+
+{\large la durée de servie peut être finie à l'arrivée d'un imprevus ou en d'autres termes un évènement terminal comme la mort ou la maladie}
+
+\subsubsection{les taux de mortalité par maximum de vraisemblance}
+{\large Le taux de mortalité est noté $\mu_{x}$. A partir de ce paramètre on peut calculer la probabilité qu'un individu ayant l'age x meurt avec la formule qui suit :}
+
+\includegraphics[width=\textwidth]{12.png}
+\setstretch{1.5}
+
+{\large  on cherche à maximiser la formule ci dessus. Pour ce faire on utilise un algorithme iteratif unidimensionnel.}
+
+
+\subsubsection{calcul de la VAP de la rente viagère anticipée et du capital décès}
+{\large En utilisant la commande axn on a réussi à calculer la VAP de la rente viagère qui est égale à 13.64 }
+\setstretch{1.25}
+
+{\large En utilisant la commande Axn on a réussi à calculer la VAP du capital de décès qui est égale à 0.59}
+\subsubsection{Estimation  d'un modèle  Lee-Carter}
+{\large En utilisant la fonction plot(), on a pu récupérer le graphe des log de taux de mortalité en fonction de l'âge}
+
+\includegraphics[width=\textwidth]{13.png}
+
+\begin{center}
+    {\large Figure 3:Graphes des log de taux de mortalité}
+\end{center}
+\setstretch{2}
+
+{\large On peut remarquer dans le graphe en fonction de l'age une grande chute causée par des évènements sociales. Il est alors commode de choisir la tranche entre l'âge 20 et 100 pour faire ses études. }
+\setstretch{1.5}
+
+{\large On a utilisé le modèle de Lee Carter pour faire une estimation des paramètres. à savoir la formule qu'on a déjà expliquée:}
+\setstretch{1.5}
+
+\begin{center}
+    {\large ln($\mu_{xt} $) = $\alpha_{x}$ + $\beta_{x}$* $k_{t} $ + $\epsilon_{xt} $}
+\end{center}
+\setstretch{1.5}
+
+{\large $\alpha_{x}$ : Il s'agit de la valeur moyenne des logs de la mortalité. elle fluctue entre -7 et -3 en fonction de l'âge. Dans le graphe ci dessous on remarque une augmentation légère entre l'âge 20 et l'âge 40 suivie par une augmentation progressive de l'âge 40 jusqu'à l'âge 100 ans.  }
+
+\includegraphics[width=\textwidth]{17.png}
+\begin{center}
+    {\large Figure 4 : Estimation de $\alpha_{x}$ }
+\end{center}
+\setstretch{1.5}
+
+{\large $\beta_{x}$ : C'est la sensibilité de la mortalité instantanée. Sa valeur subit une chute entre l'âge 0 et 20 suivie par une diminution progressive de l'âge 20 jusqu'à l'âge de 100.}
+
+\includegraphics[width=\textwidth]{18.png}
+\begin{center}
+    {\large Figure 5: Estimation de $\beta_{x}$ }
+\end{center}
+\setstretch{1.5}
+
+{\large  Pour  $k_{t}$ qui représente l'évolution générale de la mortalité dans le temps , on remarque une diminution progressive de l'année 1920 jusqu'à l'année 2019 environ. On conclut alors qu'il y a une augmentation du taux de survie au cours du temps.}
+
+\includegraphics[width=\textwidth]{19.png}
+\begin{center}
+    {\large Figure 6: Estimation de $k_{t}$}
+\end{center}
+
+{\large ci dessous figurent les résidus des paramètres qui reprèsentent l'erreur de chaque estimation}
+
+\includegraphics[width=\textwidth]{20.png}
+
+\begin{center}
+    {\large Figure 7: les résidus du modèle}
+\end{center}
+ 
+
+\subsubsection{Estimation de la projection centrale}
+{\large On a réalisé la projection de la mortalité future sur 25 ans, on a trouvé à l'aide de library(forecast) une prédiction qui figure sur le tracé ci dessous}
+
+\includegraphics[width=\textwidth]{21.png}
+
+\begin{center}
+    {\large Figure 8: Estimation de la projection centrale}
+\end{center}
+
+\subsubsection{Affichage  des log taux de mortalités projetés}
+{\large On remarque dans le tracé ci dessous  des hauts et des bas entre l'âge 0 et 20 ensuite une augmentation progressive  atteignant l'âge 80 et plus.}
+
+\includegraphics[width=\textwidth]{22.png}
+
+\begin{center}
+    {\large Figure 9: Taux de mortalité projetés}
+\end{center}
+\subsubsection{Comparaison des deux résultats  de montant de la VAP}
+{\large En calculant la VAP de la rente viagère anticipée el la VAP du capital décès par rapport au taux de mortalité de référence des taux projetés on a constaté que :}
+\setstretch{1.25}
+
+{\large La VAP de la rente viagère anticipée a diminué en comparant 2018 aux taux projetés de 13.64 jusqu'à 12.7 d'un écart de 0.68 pourcent }
+\setstretch{1.25}
+
+{\large La VAP ddu capital décès a diminué en comparant 2018 aux taux projetés de 0.59 jusqu'à 0.75 d'un écart de 27 pourcent. }
+\setstretch{1.25}
+
+{\large ces constatations clarifie l'effet des taux de mortalité sur les valeurs de la VAP.}
+\subsection {Conclusion}
+{\large A travers le travail accompli dans ce projet , nous avons pu souligner l'influence de taux de mortalité sur les changement de la valeur actuelle probable.}
+\section{Outils utilisés}
+\subsection {R}
+{\large R est un langage de programmation et un logiciel libre utilisé pour réaliser des  statistiques et à la manipulations relatives aux sciences des données soutenu par la R Foundation for Statistical Computing. Il fait partie de la liste des paquets GNU3 et est écrit en C (langage), Fortran et R.
+Le langage R est largement utilisé par les statisticiens, les data miners, data scientists pour développer des logiciels statistiques et faire l'analyse des données.}
+\subsection{Packages utilisés}
+\subsubsection{ Package StMoMo}
+{\large StMoMo (Modélisation de la mortalité stochastique) est un package R contenant des fonctions spécifiées à l'ajustement des modèles de mortalité stochastiques, notamment les modèles de Lee-Carter, le modèle CBD, le modèle APC et d'autres modèles. Le package comprend aussi des outils qui analysent la qualité de l'ajustement des modèles et effectuent des projections et des simulations de mortalité. }
+\subsubsection{Package Demography}
+{\large Le package R demography contient des fonctions d'analyse démographique, citons par exemple : des calculs de table de survie ; modélisation du modèle Lee-Carter; analyse des données fonctionnelles des taux de mortalité, des taux de fécondité..etc.
+\subsubsection{Package Lifecontingencies}
+{\large Ce package contient des classes et des  méthodes spécifiques à la  gestion des tables de mortalité (à décréments simples et multiples) et des tables actuarielles. Il présente également des fonctions qui effectuent facilement des mathématiques démographiques, financières et actuarielles sur les calculs d'assurance vie qui y sont contenues.  }
+\subsubsection{ Package reliaR}
+{\large C'est un package spécifique à la distribution de probabilités.}
+\section{Conclusion Générale}
+{\large Durant ce travail , en utilisant le modèle de Lee Carter, on a pu étudier les tables de mortalité en tenant compte des risques.Ces tables ont été construites de façon à projeter l'évolution des taux dans le futur.}
+\newpage
+\section{Références}
+
+{\large https://www.universalis.fr/encyclopedie/actuariat-et-actuaires/}
+\setstretch{1.25}
+
+{\large https://www.meteojob.com/fiches-metiers/metier-actuaire.html}
+\setstretch{1.25}
+
+{\large https://espaceclient.allianz.fr/pmt/guide/Retraites.STANDARD}
+\setstretch{1.25}
+{\large https://www.ffa-assurance.fr/}
+\setstretch{1.25}
+
+{\large  https://arxiv.org/ftp/arxiv/papers/1001/1001.1916.pdf}
+\setstretch{1.25}
+
+{\large http://www.ressources-actuarielles.net}
+\setstretch{1.25}
+
+{\large https://www.journaldunet.fr}
+\setstretch{1.25}
+
+{\large https://fr.wikipedia.org/wiki/R_(langage)}
+\setstretch{1.25}
+
+{\large https://www.rdocumentation.org/packages/StMoMo/versions/0.4.1}
+\setstretch{1.25}
+{\large https://www.rdocumentation.org/packages/demography/versions/1.22}
+\setstretch{1.25}
+{\large https://www.rdocumentation.org/packages/lifecontingencies/versions/1.3.7}
+\setstretch{1.25}
+{\large https://www.rdocumentation.org/packages/reliaR/versions/0.01}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
